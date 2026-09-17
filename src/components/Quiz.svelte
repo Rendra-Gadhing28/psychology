@@ -159,18 +159,17 @@
       <ProgressBar current={$currentIndex} total={QUESTIONS.length} />
     </header>
 
-    <!-- Center: Main Question Card -->
-    <main class="my-auto py-8 sm:py-12 flex flex-col items-center text-center">
-      <!-- Question Number Badge -->
-      <span class="inline-block px-3.5 py-1 rounded-full bg-[#EAEF9D]/50 dark:bg-[#EAEF9D]/15 border border-[#CCD77E] dark:border-[#EAEF9D]/30 text-[#1E2B20] dark:text-[#EAEF9D] text-[11px] font-semibold tracking-[0.2em] mb-6 shadow-sm">
-        SOAL {$currentIndex + 1} DARI {QUESTIONS.length}
-      </span>
+    <!-- Center: Main Question Card with Serene Ivory/Noir Reading Plane -->
+    <main class="my-auto py-6 sm:py-10 flex flex-col items-center text-center w-full">
+      <div class="w-full max-w-2xl mx-auto p-6 sm:p-9 rounded-[32px] bg-white/70 dark:bg-[#18231B]/70 border border-[#E2E1CA] dark:border-[#2A3B2C] shadow-sm backdrop-blur-md mb-8 sm:mb-10 transition-colors duration-300">
+        <!-- Question Number Badge -->
+        <span class="inline-block px-3.5 py-1 rounded-full bg-[#EAEF9D]/60 dark:bg-[#EAEF9D]/15 border border-[#CCD77E] dark:border-[#EAEF9D]/30 text-[#1E2B20] dark:text-[#EAEF9D] text-[11px] font-semibold tracking-[0.2em] mb-5 shadow-sm">
+          SOAL {$currentIndex + 1} DARI {QUESTIONS.length}
+        </span>
 
-      <!-- Question Text: Cinematic Literary Serif with Watermark Quote -->
-      <div class="relative max-w-xl mx-auto mb-10 px-2">
-        <span class="font-serif-instrument italic absolute -top-8 -left-3 text-7xl text-[#CCD77E]/30 dark:text-[#EAEF9D]/15 select-none pointer-events-none" aria-hidden="true">“</span>
-        <h2 class="font-serif-luxury text-2xl sm:text-3xl md:text-[34px] font-normal text-[#16241A] dark:text-[#F4F7EE] leading-[1.35] tracking-tight relative z-10">
-          {currentQ.text}
+        <!-- Question Text: Bolder (font-semibold) Cormorant Garamond, clean harmonious contrast -->
+        <h2 class="font-serif-luxury text-2xl sm:text-3xl md:text-[34px] font-semibold text-[#18261B] dark:text-[#F4F7EE] leading-[1.38] tracking-tight">
+          “{currentQ.text}”
         </h2>
       </div>
 

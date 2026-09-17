@@ -23,8 +23,8 @@
     <Icon name={chapter.icon} size={30} strokeWidth={1.8} />
   </div>
 
-  <!-- Title in Classical Garamond Serif -->
-  <h2 class="font-serif-luxury text-3xl sm:text-5xl font-normal text-[#16231A] dark:text-[#F4F7EE] tracking-tight leading-snug mb-2">
+  <!-- Title in Classical Garamond Serif: Confident, Regal Weight -->
+  <h2 class="font-serif-luxury text-3xl sm:text-5xl font-medium sm:font-semibold text-[#16231A] dark:text-[#F4F7EE] tracking-tight leading-snug mb-2">
     {chapter.title}
   </h2>
 

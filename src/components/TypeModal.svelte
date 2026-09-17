@@ -4,6 +4,8 @@
   import { playClick } from '../lib/sounds.js';
 
   let { item, onClose } = $props();
+  let modalRef = $state(null);
+  let closeBtnRef = $state(null);
 
   function handleClose() {
     playClick();
@@ -13,11 +15,39 @@
   function handleKeydown(e) {
     if (e.key === 'Escape') {
       handleClose();
+      return;
+    }
+
+    if (e.key === 'Tab' && modalRef) {
+      const focusable = modalRef.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusable.length === 0) return;
+
+      const firstEl = focusable[0];
+      const lastEl = focusable[focusable.length - 1];
+
+      if (e.shiftKey) {
+        if (document.activeElement === firstEl) {
+          e.preventDefault();
+          lastEl.focus();
+        }
+      } else {
+        if (document.activeElement === lastEl) {
+          e.preventDefault();
+          firstEl.focus();
+        }
+      }
     }
   }
 
   onMount(() => {
     window.addEventListener('keydown', handleKeydown);
+    // Focus close button initially for accessibility
+    setTimeout(() => {
+      if (closeBtnRef) closeBtnRef.focus();
+    }, 50);
+
     return () => window.removeEventListener('keydown', handleKeydown);
   });
 </script>
@@ -37,12 +67,16 @@
   ></button>
 
   <!-- Modal Box -->
-  <div class="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-[36px] bg-[#FAF9F3] dark:bg-[#18231B] border border-[#DDDDC6] dark:border-[#2C3D2E] p-6 sm:p-8 shadow-2xl">
+  <div
+    bind:this={modalRef}
+    class="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-[36px] bg-[#FAF9F3] dark:bg-[#18231B] border border-[#DDDDC6] dark:border-[#2C3D2E] p-6 sm:p-8 shadow-2xl"
+  >
     <!-- Close Button (Ergonomic 44x44px touch target) -->
     <button
+      bind:this={closeBtnRef}
       type="button"
       onclick={handleClose}
-      class="absolute top-5 right-5 w-11 h-11 rounded-2xl bg-[#EBEAD3] dark:bg-[#223024] text-[#485946] hover:text-[#19261C] dark:hover:text-[#F3F6ED] flex items-center justify-center hover:scale-105 active:scale-95 transition-all focus:outline-none focus:ring-2 focus:ring-[#EAEF9D]"
+      class="absolute top-5 right-5 w-11 h-11 rounded-2xl bg-[#EBEAD3] dark:bg-[#223024] text-[#485946] hover:text-[#19261C] dark:hover:text-[#F3F6ED] flex items-center justify-center hover:scale-105 active:scale-95 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EAEF9D]"
       aria-label="Tutup modal profil"
     >
       <Icon name="close" size={18} />

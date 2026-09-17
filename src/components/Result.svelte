@@ -34,21 +34,35 @@
 
     try {
       const html2canvas = (await import('html2canvas')).default;
+      const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+      // High-resolution yet memory-conscious scale: 2.5x on mobile to avoid memory spikes, 3x on desktop
+      const renderScale = isMobile ? 2.5 : 3;
+
       const canvas = await html2canvas(cardElement, {
-        scale: 3,
+        scale: renderScale,
         useCORS: true,
         backgroundColor: null,
         logging: false
       });
 
-      const dataUrl = canvas.toDataURL('image/png');
-      const link = document.createElement('a');
-      link.download = `psychology-${result.type}.png`;
-      link.href = dataUrl;
-      link.click();
+      // Use native toBlob instead of huge base64 string on JS heap
+      canvas.toBlob((blob) => {
+        if (!blob) {
+          isDownloading = false;
+          return;
+        }
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.download = `psychology-${result.type}.png`;
+        link.href = url;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+        isDownloading = false;
+      }, 'image/png');
     } catch (err) {
       console.error('Download card error:', err);
-    } finally {
       isDownloading = false;
     }
   }
@@ -287,12 +301,12 @@
       />
     </div>
 
-    <!-- Download Trigger Button (Min 44px touch target) -->
+    <!-- Download Trigger Button (Zero-CLS min-width & min 44px touch target) -->
     <button
       type="button"
       onclick={handleDownloadImage}
       disabled={isDownloading}
-      class="mt-6 inline-flex items-center justify-center gap-2.5 min-h-[48px] px-8 py-3.5 rounded-2xl bg-[#223326] hover:bg-[#19271E] dark:bg-[#EAEF9D] dark:hover:bg-[#DFE784] disabled:opacity-60 text-[#FAF9F3] dark:text-[#18241B] font-semibold text-sm sm:text-base shadow-md shadow-[#223326]/10 dark:shadow-[#EAEF9D]/15 hover:scale-105 active:scale-95 transition-all duration-200"
+      class="mt-6 inline-flex items-center justify-center gap-2.5 min-h-[48px] min-w-[230px] px-8 py-3.5 rounded-2xl bg-[#223326] hover:bg-[#19271E] dark:bg-[#EAEF9D] dark:hover:bg-[#DFE784] disabled:opacity-60 text-[#FAF9F3] dark:text-[#18241B] font-semibold text-sm sm:text-base shadow-md shadow-[#223326]/10 dark:shadow-[#EAEF9D]/15 hover:scale-105 active:scale-95 transition-all duration-200"
     >
       {#if isDownloading}
         <div class="w-4 h-4 border-2 border-[#FAF9F3]/30 border-t-[#FAF9F3] dark:border-[#18241B]/30 dark:border-t-[#18241B] rounded-full animate-spin"></div>

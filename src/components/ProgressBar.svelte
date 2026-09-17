@@ -6,7 +6,15 @@
   );
 </script>
 
-<div class="w-full select-none" role="progressbar" aria-valuenow={percentage} aria-valuemin="0" aria-valuemax="100">
+<div
+  class="w-full select-none"
+  role="progressbar"
+  aria-label="Kemajuan pengerjaan tes kepribadian"
+  aria-valuenow={percentage}
+  aria-valuemin="0"
+  aria-valuemax="100"
+  aria-valuetext="{percentage}% selesai"
+>
   <div class="flex items-center justify-between text-xs font-semibold text-[#5A6D5C] dark:text-[#9FB19E] mb-2">
     <span>Soal {Math.min(current + 1, total)} dari {total}</span>
     <span class="text-[#203123] dark:text-[#EAEF9D] font-bold font-mono">{percentage}% selesai</span>

@@ -25,17 +25,38 @@
     playClick();
     selected = id;
   }
+
+  function handleKeydown(e, idx) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+      e.preventDefault();
+      const nextIdx = (idx + 1) % templates.length;
+      handleSelect(templates[nextIdx].id);
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      const prevIdx = (idx - 1 + templates.length) % templates.length;
+      handleSelect(templates[prevIdx].id);
+    }
+  }
 </script>
 
 <div class="flex flex-col items-center gap-2 select-none">
-  <span class="text-xs font-semibold text-[#576956] dark:text-[#9EB09C]">Pilih Palet Kartu (Old Money)</span>
-  <div class="flex items-center gap-3">
-    {#each templates as t}
+  <span id="palette-label" class="text-xs font-semibold text-[#576956] dark:text-[#9EB09C]">Pilih Palet Kartu (Old Money)</span>
+  <div
+    class="flex items-center gap-3"
+    role="radiogroup"
+    aria-labelledby="palette-label"
+  >
+    {#each templates as t, idx}
       {@const isActive = selected === t.id}
       <button
         type="button"
+        role="radio"
+        aria-checked={isActive}
+        aria-label={`Palet kartu ${t.label}`}
+        tabindex={isActive ? 0 : -1}
         onclick={() => handleSelect(t.id)}
-        class="flex flex-col items-center gap-1.5 focus:outline-none"
+        onkeydown={(e) => handleKeydown(e, idx)}
+        class="flex flex-col items-center gap-1.5 min-w-[44px] min-h-[44px] rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[#CCD77E] dark:focus-visible:ring-[#EAEF9D] focus-visible:ring-offset-2 dark:focus-visible:ring-offset-[#121813]"
       >
         <div
           class="w-11 h-14 rounded-xl border-2 transition-all duration-200 {t.bgPreview} {isActive ? 'ring-2 ring-[#CCD77E] dark:ring-[#EAEF9D] ring-offset-2 dark:ring-offset-[#121813] scale-105 border-[#BAC65E] shadow-sm' : 'opacity-70 hover:opacity-100 hover:scale-102'}"

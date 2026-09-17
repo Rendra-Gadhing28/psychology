@@ -10,6 +10,7 @@
   let ringX = $state(-100);
   let ringY = $state(-100);
   let animId = null;
+  let isLooping = false;
 
   function onMouseMove(e) {
     mouseX = e.clientX;
@@ -29,6 +30,11 @@
     } else {
       isHovered = false;
     }
+
+    if (!isLooping) {
+      isLooping = true;
+      animId = requestAnimationFrame(renderRing);
+    }
   }
 
   function onMouseLeave() {
@@ -40,8 +46,19 @@
   }
 
   function renderRing() {
-    ringX += (mouseX - ringX) * 0.16;
-    ringY += (mouseY - ringY) * 0.16;
+    const dx = mouseX - ringX;
+    const dy = mouseY - ringY;
+
+    // Halt RAF when ring is in place to eliminate idle GPU churn
+    if (Math.abs(dx) < 0.1 && Math.abs(dy) < 0.1) {
+      ringX = mouseX;
+      ringY = mouseY;
+      isLooping = false;
+      return;
+    }
+
+    ringX += dx * 0.16;
+    ringY += dy * 0.16;
     animId = requestAnimationFrame(renderRing);
   }
 
