@@ -1,0 +1,164 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-jakarta: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-instrument: "Instrument Serif", Georgia, serif;
+  --color-ketupat: #EAEF9D;
+  --color-ketupat-light: #F6F9D7;
+  --color-ketupat-dark: #C9D267;
+  --color-forest: #223326;
+  --color-forest-dark: #152219;
+  --color-forest-light: #324738;
+  --color-olive-muted: #566958;
+  --color-sage: #95A691;
+  --color-cream: #FAF9F3;
+  --color-cream-subtle: #F3F3E8;
+  --color-noir-deep: #131A14;
+  --color-noir-card: #1C261E;
+}
+
+/* Custom cursor - desktop pointer fine only */
+@media (pointer: fine) {
+  .custom-cursor-active,
+  .custom-cursor-active * {
+    cursor: none !important;
+  }
+}
+
+/* Smooth scroll & old-money luxury selection */
+::selection {
+  background-color: #EAEF9D;
+  color: #1A261D;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+  font-family: var(--font-jakarta);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  font-family: var(--font-jakarta);
+  background-color: #FAF9F3;
+  color: #1D261F;
+  letter-spacing: -0.01em;
+}
+
+.dark body {
+  background-color: #121813;
+  color: #E6ECE1;
+}
+
+/* Editorial Typography Rules for soft, cinematic elegance */
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+  letter-spacing: -0.02em;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+.font-serif-luxury {
+  font-family: var(--font-serif);
+  font-feature-settings: "lnum" 1, "liga" 1;
+}
+
+.font-serif-instrument {
+  font-family: var(--font-instrument);
+}
+
+/* Subtle cinematic vignette layer */
+.cinematic-vignette {
+  background: radial-gradient(circle at 50% 35%, transparent 60%, rgba(26, 38, 28, 0.035) 100%);
+}
+
+.dark .cinematic-vignette {
+  background: radial-gradient(circle at 50% 35%, transparent 55%, rgba(0, 0, 0, 0.28) 100%);
+}
+
+/* Soft custom scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D8D7BE;
+  border-radius: 9999px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #2D3B2E;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C4CFA0;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #415343;
+}
+
+/* Safe area for mobile notch */
+.pb-safe {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
+}
+
+/* Micro-interaction animation for Likert */
+@keyframes pulse-once {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+.animate-pulse-once {
+  animation: pulse-once 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Shimmer effect for skeleton */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, rgba(234, 239, 157, 0.25) 25%, rgba(245, 248, 213, 0.45) 50%, rgba(234, 239, 157, 0.25) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 0.75rem;
+}
+
+.dark .skeleton {
+  background: linear-gradient(90deg, rgba(30, 42, 33, 0.8) 25%, rgba(45, 60, 48, 0.9) 50%, rgba(30, 42, 33, 0.8) 75%);
+  background-size: 200% 100%;
+}
+
+/* Respectful accessibility: gentle reduced motion preserving state change */
+@media (prefers-reduced-motion: reduce) {
+  .animate-pulse-once {
+    animation: none;
+  }
+  .skeleton {
+    animation: none;
+    opacity: 0.7;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
