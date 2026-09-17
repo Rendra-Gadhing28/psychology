@@ -81,7 +81,7 @@
         <Icon name="brain" size={15} />
       </div>
       <div>
-        <div class="text-[12px] font-bold tracking-[0.25em] uppercase">phsycology</div>
+        <div class="text-[12px] font-bold tracking-[0.25em] uppercase">psychology</div>
         <div class="text-[9px] uppercase tracking-[0.18em] font-medium" style="color: {themeConfig.subtext};">Old Money Assessment</div>
       </div>
     </div>
@@ -147,7 +147,7 @@
 
     <div class="flex items-center justify-between text-[10px] font-normal" style="color: {themeConfig.subtext};">
       <span>Populasi: {resultData.population}%</span>
-      <span class="tracking-[0.18em] uppercase text-[9px] font-medium">phsycology.id</span>
+      <span class="tracking-[0.18em] uppercase text-[9px] font-medium">psychology.id</span>
     </div>
   </div>
 </div>

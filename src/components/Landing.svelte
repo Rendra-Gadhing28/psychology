@@ -77,6 +77,6 @@
 
   <!-- Micro Footer with high WCAG contrast -->
   <div class="mt-16 text-[11px] text-[#4F604E] dark:text-[#9FB19B] tracking-[0.25em] uppercase font-medium">
-    phsycology • quiet luxury self-discovery
+    psychology • quiet luxury self-discovery
   </div>
 </div>

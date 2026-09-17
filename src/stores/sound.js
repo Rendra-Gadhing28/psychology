@@ -5,7 +5,7 @@ function createSoundStore() {
   let initial = true;
 
   if (isBrowser) {
-    const saved = localStorage.getItem('phsycology-sound');
+    const saved = localStorage.getItem('psychology-sound');
     if (saved !== null) {
       initial = saved === 'true';
     }
@@ -17,7 +17,7 @@ function createSoundStore() {
     subscribe,
     set: (val) => {
       if (isBrowser) {
-        localStorage.setItem('phsycology-sound', String(val));
+        localStorage.setItem('psychology-sound', String(val));
       }
       set(val);
     },
@@ -25,7 +25,7 @@ function createSoundStore() {
       update((curr) => {
         const next = !curr;
         if (isBrowser) {
-          localStorage.setItem('phsycology-sound', String(next));
+          localStorage.setItem('psychology-sound', String(next));
         }
         return next;
       });

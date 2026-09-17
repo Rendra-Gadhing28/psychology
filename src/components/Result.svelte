@@ -43,7 +43,7 @@
 
       const dataUrl = canvas.toDataURL('image/png');
       const link = document.createElement('a');
-      link.download = `phsycology-${result.type}.png`;
+      link.download = `psychology-${result.type}.png`;
       link.href = dataUrl;
       link.click();
     } catch (err) {

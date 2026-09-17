@@ -1,7 +1,7 @@
 import { writable, derived, get } from 'svelte/store';
 import { QUESTIONS } from '../lib/questions.js';
 
-const STORAGE_KEY = 'phsycology_quiz_state';
+const STORAGE_KEY = 'psychology_quiz_state';
 
 function loadSavedState() {
   if (typeof window === 'undefined') return null;

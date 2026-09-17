@@ -13,21 +13,21 @@ describe('Theme Store & Dark Mode Synchronization', () => {
     theme.set('light');
     expect(get(theme)).toBe('light');
     expect(document.documentElement.classList.contains('dark')).toBe(false);
-    expect(localStorage.getItem('phsycology-theme')).toBe('light');
+    expect(localStorage.getItem('psychology-theme')).toBe('light');
 
     theme.toggle();
     expect(get(theme)).toBe('dark');
     expect(document.documentElement.classList.contains('dark')).toBe(true);
-    expect(localStorage.getItem('phsycology-theme')).toBe('dark');
+    expect(localStorage.getItem('psychology-theme')).toBe('dark');
 
     theme.toggle();
     expect(get(theme)).toBe('light');
     expect(document.documentElement.classList.contains('dark')).toBe(false);
-    expect(localStorage.getItem('phsycology-theme')).toBe('light');
+    expect(localStorage.getItem('psychology-theme')).toBe('light');
   });
 
   it('harus memuat tema tersimpan dari localStorage saat init', () => {
-    localStorage.setItem('phsycology-theme', 'dark');
+    localStorage.setItem('psychology-theme', 'dark');
     theme.init();
     expect(get(theme)).toBe('dark');
     expect(document.documentElement.classList.contains('dark')).toBe(true);

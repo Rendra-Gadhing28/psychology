@@ -25,7 +25,7 @@ describe('Quiz & Sound Stores', () => {
     recordAnswer(2, 4);
     expect(get(answers).length).toBe(2);
 
-    const stored = JSON.parse(sessionStorage.getItem('phsycology_quiz_state'));
+    const stored = JSON.parse(sessionStorage.getItem('psychology_quiz_state'));
     expect(stored.answers.length).toBe(2);
     expect(stored.answers[0]).toEqual({ questionId: 1, value: 2 });
   });
@@ -51,10 +51,10 @@ describe('Quiz & Sound Stores', () => {
 
     sound.toggle();
     expect(get(sound)).toBe(false);
-    expect(localStorage.getItem('phsycology-sound')).toBe('false');
+    expect(localStorage.getItem('psychology-sound')).toBe('false');
 
     sound.toggle();
     expect(get(sound)).toBe(true);
-    expect(localStorage.getItem('phsycology-sound')).toBe('true');
+    expect(localStorage.getItem('psychology-sound')).toBe('true');
   });
 });

@@ -5,7 +5,7 @@ function createThemeStore() {
   
   let initialTheme = 'light';
   if (isBrowser) {
-    const saved = localStorage.getItem('phsycology-theme');
+    const saved = localStorage.getItem('psychology-theme');
     if (saved === 'dark' || saved === 'light') {
       initialTheme = saved;
     } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -23,7 +23,7 @@ function createThemeStore() {
     } else {
       root.classList.remove('dark');
     }
-    localStorage.setItem('phsycology-theme', theme);
+    localStorage.setItem('psychology-theme', theme);
   }
 
   // Apply immediately on initialization
@@ -46,7 +46,7 @@ function createThemeStore() {
     },
     init: () => {
       if (!isBrowser) return;
-      const saved = localStorage.getItem('phsycology-theme');
+      const saved = localStorage.getItem('psychology-theme');
       let t = saved;
       if (!t) {
         t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
